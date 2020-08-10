@@ -10,7 +10,7 @@ export class HtmlComponent implements Component {
     this.props = props;
   }
 
-  render(parentDomNode: HTMLElement) {
+  render(previousInstance: HtmlComponent, parentDomNode: HTMLElement) {
     const dom = document.createElement(this.type);
 
     const isEvent = (name: string) => name.startsWith("on");
@@ -37,7 +37,9 @@ export class HtmlComponent implements Component {
       );
     }
 
-    this.props.children.forEach((child) => child.render(dom));
+    this.props.children.forEach((child, index) =>
+      child.render(previousInstance?.props?.children[index], dom)
+    );
 
     parentDomNode.appendChild(dom);
   }

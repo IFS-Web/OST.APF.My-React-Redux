@@ -7,7 +7,7 @@ export class TextComponent implements Component {
     this.nodeValue = nodeValue;
   }
 
-  render(parentDomNode: HTMLElement) {
+  render(previousInstance: TextComponent, parentDomNode: HTMLElement) {
     const dom = document.createTextNode(this.nodeValue);
 
     parentDomNode.appendChild(dom);

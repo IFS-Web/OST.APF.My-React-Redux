@@ -1,3 +1,3 @@
 export interface Component {
-  render(parentDomNode: HTMLElement): void;
+  render(previous: Component, parentDomNode: HTMLElement): void;
 }
