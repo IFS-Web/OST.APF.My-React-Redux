@@ -11,9 +11,12 @@ export function createElement(
 ): Component {
   const allProps = {
     ...props,
-    children: children?.map((child) =>
-      typeof child === "object" ? child : new TextComponent(child)
-    ),
+    children: children
+      ?.map((child) =>
+        typeof child === "object" ? child : new TextComponent(child)
+      )
+      // In some circusmtances, children is an [[]], so we flatten it here:
+      .reduce((acc, val) => acc.concat(val), []),
   };
 
   if (typeof tag === "function") {

@@ -6,6 +6,10 @@ let rootComponent: Component = undefined;
 let rootDomNode: HTMLElement = undefined;
 
 export function render(component: Component, parentDomNode: HTMLElement) {
+  while (parentDomNode.firstChild) {
+    parentDomNode.removeChild(parentDomNode.lastChild);
+  }
+
   component.render(rootComponent, parentDomNode);
 
   rootComponent = component;

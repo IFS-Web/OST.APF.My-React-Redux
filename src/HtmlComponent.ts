@@ -38,6 +38,9 @@ export class HtmlComponent implements Component {
     }
 
     this.props.children.forEach((child, index) =>
+      // Actually, we would need to check if the children are
+      // still the same component! This could be done by looking
+      // at the type, key, etc.
       child.render(previousInstance?.props?.children[index], dom)
     );
 
