@@ -1,5 +1,4 @@
 import { Component } from "./Component";
-import { Props } from "./Props";
 
 export class TextComponent implements Component {
   private nodeValue: string;
@@ -8,5 +7,9 @@ export class TextComponent implements Component {
     this.nodeValue = nodeValue;
   }
 
-  render(parentDomNode: HTMLElement) {}
+  render(parentDomNode: HTMLElement) {
+    const dom = document.createTextNode(this.nodeValue);
+
+    parentDomNode.appendChild(dom);
+  }
 }

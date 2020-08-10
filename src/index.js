@@ -1,4 +1,4 @@
-import { createElement } from "./my-react";
+import { createElement, render } from "./my-react";
 
 const App = (
   <div>
@@ -7,4 +7,5 @@ const App = (
   </div>
 );
 
-console.log(JSON.stringify(App, null, 2));
+const container = document.getElementById("root");
+render(App, container);
