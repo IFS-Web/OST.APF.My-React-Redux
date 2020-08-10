@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    [
+      "@babel/plugin-transform-react-jsx",
+      {
+        "pragma": "createElement",
+        /* https://babeljs.io/docs/en/babel-plugin-transform-react-jsx/ */
+        "runtime": "classic"
+      }
+    ]
+  ]
+}
