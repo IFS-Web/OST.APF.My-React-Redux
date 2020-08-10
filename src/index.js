@@ -1,11 +1,20 @@
 import { createElement, render } from "./my-react";
 
-const App = (
-  <div>
-    <h1>My React</h1>
-    <p>Let's re-create React from scratch!</p>
-  </div>
-);
+function HelloMessage(props) {
+  return <p>Hello {props.name}</p>;
+}
+
+function HelloWorld() {
+  return <HelloMessage name="OST"></HelloMessage>;
+}
+
+function Wrapper() {
+  return <HelloWorld />;
+}
+
+function App() {
+  return <Wrapper />;
+}
 
 const container = document.getElementById("root");
-render(App, container);
+render(<App />, container);

@@ -2,9 +2,10 @@ import { Component } from "./Component";
 import { Props } from "./Props";
 import { HtmlComponent } from "./HtmlComponent";
 import { TextComponent } from "./TextComponent";
+import { FunctionalComponent } from "./FunctionalComponent";
 
 export function createElement(
-  tag: string,
+  tag: string | ((props: Props) => Component),
   props: Props = {},
   ...children: Component[]
 ): Component {
@@ -15,5 +16,9 @@ export function createElement(
     ),
   };
 
-  return new HtmlComponent(tag, allProps);
+  if (typeof tag === "function") {
+    return new FunctionalComponent(tag, allProps);
+  } else {
+    return new HtmlComponent(tag, allProps);
+  }
 }
