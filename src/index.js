@@ -1,36 +1,46 @@
-import { useState, useEffect, render, createElement } from "./my-react";
+import { useEffect, render, createElement } from "./my-react";
+import { createStore } from "./my-redux";
+import { Provider } from "./my-react-redux";
+import { reducer } from "./reducer";
+import { resetCount, incrementCount } from "./actionCreators";
 
-function Counter() {
-  const [value1, setValue1] = useState(0);
+const store = createStore(reducer, {});
+
+function CounterView() {
+  const { count } = store.getState();
 
   useEffect(() => {
-    console.log("Counter changed to", value1);
-    if (value1 == 5) {
-      setValue1(0);
+    if (count == 5) {
+      store.dispatch(resetCount(0));
     }
-  }, [value1]);
+  }, [count]);
 
   return (
     <div>
-      <p>You clicked {value1} times!</p>
-      <button onClick={() => setValue1(value1 + 1)}>Click me</button>
+      <p>You clicked {count} times!</p>
+    </div>
+  );
+}
+
+function CounterButton() {
+  return (
+    <div>
+      <button onClick={() => store.dispatch(incrementCount())}>
+        Increment
+      </button>
+      <button onClick={() => store.dispatch(resetCount(0))}>Reset</button>
     </div>
   );
 }
 
 function App() {
-  useEffect(() => {
-    console.log("App rendered once");
-  }, []);
-
-  useEffect(() => {
-    console.log("App rendered");
-  });
-
   return (
-    <div>
-      <Counter />
-    </div>
+    <Provider store={store}>
+      <div>
+        <CounterView />
+        <CounterButton />
+      </div>
+    </Provider>
   );
 }
 
